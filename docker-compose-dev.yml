@@ -1,0 +1,10 @@
+services:
+  
+  petshop-db:
+    image: petshop-db:dev
+
+  petshop-web:
+    image: petshop-web:dev
+
+  petshop-api:
+    image: petshop-api:dev

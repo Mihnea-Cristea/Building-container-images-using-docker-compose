@@ -1,0 +1,40 @@
+#Basic compose to build three containers, containing the database for the pet shop web app, the web app itself and the api for the web application
+services:
+  
+  petshop-db:
+    image: psdockernetfx/petshop-db
+    environment:
+      - sa_password=p3t-sh##p-m5
+    networks:
+      - app-net
+
+  petshop-web:
+    image: psdockernetfx/petshop-web:m4
+    ports:
+      - 8010:80
+    volumes:
+      - type: bind
+        source: .\config\web
+        target: C:\petshop-web\config
+    depends_on:
+      - petshop-db
+    networks:
+      - app-net
+
+  petshop-api:
+    image: psdockernetfx/petshop-api:m4-v3
+    ports:
+      - 8080:80
+    environment: 
+      - PetShop__Web__Domain=localhost:8010
+    volumes:
+      - type: bind
+        source: .\config\api
+        target: C:\petshop-api\config
+    depends_on:
+      - petshop-db
+    networks:
+      - app-net
+
+networks:
+  app-net:

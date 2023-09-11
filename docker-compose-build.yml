@@ -1,0 +1,16 @@
+services:
+  
+  petshop-db:
+    image: petshop-db:dev
+    build:
+      context: ./petshop/db
+
+  petshop-web:
+    image: petshop-web:dev
+    build:
+      context: ./petshop/web
+
+  petshop-api:
+    image: petshop-api:dev
+    build:
+      context: ./petshop/api
